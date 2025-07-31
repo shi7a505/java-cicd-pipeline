@@ -224,7 +224,8 @@ Key steps include:
 - Artifact upload to Nexus
 - Slack notification
 
-\
+📄 View the full Jenkinsfile here: [Jenkinsfile](./Jenkinsfile)
+
 ## 👤 Author
 
 - **Mahmoud Shiha**  
