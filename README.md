@@ -104,3 +104,128 @@ sudo apt-get install jenkins
 - Update your EC2 **Security Group** to open the following ports:
   - `8080` – for accessing Jenkins UI  
   - `22` – for SSH access
+
+### ✅ 2. Access Jenkins & Install Tools
+
+- Open your browser and navigate to your Jenkins server using its public IP address.  
+  For example:  
+  `http://13.59.122.100:8080`
+
+- Follow the setup wizard and install the **Suggested Plugins**.
+
+- Once inside Jenkins, go to:  
+  `Manage Jenkins > Global Tool Configuration`
+
+- Add the following tools:
+  - **JDK 21**  
+    Name: `JDK21`
+  - **Maven 3.9**  
+    Name: `MAVEN3.9`
+
+> These tools will be used in the Jenkinsfile to build and test the application.
+
+### ✅ 3. Launch Nexus & SonarQube EC2 Instances
+
+- Create two additional EC2 instances (Ubuntu or Amazon Linux):
+
+  - One for **Nexus Repository Manager**
+  - One for **SonarQube Server**
+
+- For each instance:
+  - Open the required ports in the security group:
+    - `8081` → Nexus
+    - `9000` → SonarQube
+    - `22` → SSH
+
+  - Allow inbound traffic **only** from the Jenkins EC2 instance (either by using private IP or referencing its security group).
+
+- After installation:
+  - Access Nexus in browser: `http://<nexus-ip>:8081`
+  - Access SonarQube in browser: `http://<sonarqube-ip>:9000`
+
+### ✅ 4. Configure Integration in Jenkins
+
+#### 🔸 SonarQube Integration:
+1. Go to `Manage Jenkins > Configure System`.
+2. Scroll to the **SonarQube Servers** section.
+3. Add a new server:
+   - **Name**: `sonarserver`
+   - **Server URL**: `http://<your-sonarqube-ip>:9000`
+   - **Authentication Token**: (Generate it from your SonarQube account)
+
+> This name (`sonarserver`) is referenced in the Jenkinsfile.
+
+---
+
+#### 🔸 Nexus Credentials:
+1. Go to `Manage Jenkins > Credentials > (Global)` > `Add Credentials`.
+2. Set:
+   - **Kind**: Username with password
+   - **ID**: `nexuslogin`
+   - **Username**: Your Nexus username (e.g., `admin`)
+   - **Password**: Your Nexus password
+
+> This credential ID (`nexuslogin`) is also used in the Jenkinsfile to authenticate with Nexus.
+
+### ✅ 5. Set Up Slack Notifications
+
+To receive build notifications in a Slack channel, follow these steps:
+
+---
+
+#### 🔸 1. Create a Slack App & Webhook
+
+1. Go to: https://api.slack.com/apps
+2. Click **"Create New App"**
+3. Choose **"From scratch"**, give it a name, and select your workspace.
+4. Under **"Incoming Webhooks"**, activate it and click **"Add New Webhook to Workspace"**.
+5. Select your channel (e.g., `#devopscicd`) and allow access.
+6. Copy the generated Webhook URL.
+
+---
+
+#### 🔸 2. Install Slack Plugin in Jenkins
+
+1. Go to `Manage Jenkins > Plugin Manager`.
+2. Install the **Slack Notification** plugin.
+
+---
+
+#### 🔸 3. Configure Slack in Jenkins
+
+1. Go to `Manage Jenkins > Configure System`.
+2. Scroll to the **Slack** section.
+3. Set the following:
+   - **Workspace**: (name doesn’t matter)
+   - **Integration Token Credential ID**: Add a credential using your webhook URL.
+   - **Default channel**: `#devopscicd` (or whatever you chose)
+4. Test the connection to make sure it works.
+
+---
+
+> After this setup, Slack messages will be sent automatically by the pipeline using the `slackSend` step in the `Jenkinsfile`.
+
+---
+
+---
+
+## 📝 Jenkinsfile
+
+This project uses a Declarative Jenkins Pipeline, defined in a `Jenkinsfile` at the root of the repository.
+
+It includes stages for building, testing, code analysis, and deployment.
+
+Key steps include:
+- Git Checkout
+- Maven Build
+- Unit Testing
+- Checkstyle & SonarQube analysis
+- Quality Gate enforcement
+- Artifact upload to Nexus
+- Slack notification
+
+\
+## 👤 Author
+
+- **Mahmoud Shiha**  
+
