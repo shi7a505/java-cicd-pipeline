@@ -99,5 +99,8 @@ echo "deb [signed-by=/etc/apt/keyrings/jenkins-keyring.asc] \
   /etc/apt/sources.list.d/jenkins.list > /dev/null
 
 sudo apt-get update
-sudo apt-get install jenkins -y
+sudo apt-get install jenkins
 ```
+- Update your EC2 **Security Group** to open the following ports:
+  - `8080` – for accessing Jenkins UI  
+  - `22` – for SSH access
