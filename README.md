@@ -12,7 +12,7 @@ The pipeline automates building, testing, code analysis, artifact storage, and n
 This project is ideal for showcasing DevOps skills using real-world tools in a full CI/CD workflow.
 ---
 
-## 🚀 Project Overview
+##  Project Overview
 
 This CI/CD pipeline automates the software development lifecycle for a Java Maven application by integrating several DevOps tools.  
 The pipeline runs automatically on every code push and performs the following steps:
@@ -28,7 +28,7 @@ The pipeline runs automatically on every code push and performs the following st
 This setup mimics a real-world DevOps pipeline used in production environments.
 ---
 
-## 🛠️ Tools & Technologies
+##  Tools & Technologies
 
 The project integrates multiple DevOps tools and technologies to create a complete CI/CD pipeline:
 
@@ -42,41 +42,41 @@ The project integrates multiple DevOps tools and technologies to create a comple
 - **Slack** – Sends build notifications for success or failure.
 ---
 
-## 📦 Pipeline Stages
+##  Pipeline Stages
 
 The Jenkins pipeline is written using the Declarative Pipeline syntax and contains the following stages:
 
-### 🔹 1. Fetch Code
+###  1. Fetch Code
 - Pulls the source code from the `atom` branch of the GitHub repository.
 
-### 🔹 2. Build
+###  2. Build
 - Runs the Maven build command: `mvn install -DskipTests`
 - Skips tests during the build process to speed up artifact generation.
 
-### 🔹 3. Unit Testing
+###  3. Unit Testing
 - Executes unit tests using the command: `mvn test`
 - Ensures that the code behaves as expected.
 
-### 🔹 4. Checkstyle Analysis
+###  4. Checkstyle Analysis
 - Performs static code analysis to detect style violations using: `mvn checkstyle:checkstyle`
 
-### 🔹 5. SonarQube Analysis
+###  5. SonarQube Analysis
 - Runs SonarQube scanner to analyze code for bugs, vulnerabilities, and code smells.
 - Generates metrics and sends them to the SonarQube dashboard.
 
-### 🔹 6. Quality Gate
+###  6. Quality Gate
 - Waits for the result of the SonarQube Quality Gate.
 - If the gate fails, the pipeline is aborted automatically.
 
-### 🔹 7. Upload Artifact to Nexus
+###  7. Upload Artifact to Nexus
 - Uploads the generated `.war` file to a Nexus repository using the `nexusArtifactUploader` plugin.
 - Includes versioning using build ID and timestamp.
 
-### 🔹 8. Slack Notification
+###  8. Slack Notification
 - Sends a formatted message to a Slack channel with the build status (SUCCESS/FAILURE).
 ---
 
-## 🛠️ Setup Instructions
+##  Setup Instructions
 
 This CI/CD pipeline is designed to run on a main Jenkins EC2 instance, connected to separate SonarQube and Nexus EC2 instances. Follow these steps to set everything up:
 
