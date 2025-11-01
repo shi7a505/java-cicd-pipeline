@@ -157,7 +157,7 @@ sudo apt-get install jenkins
 
 ---
 
-#### 🔸 Nexus Credentials:
+####  Nexus Credentials:
 1. Go to `Manage Jenkins > Credentials > (Global)` > `Add Credentials`.
 2. Set:
    - **Kind**: Username with password
@@ -167,13 +167,13 @@ sudo apt-get install jenkins
 
 > This credential ID (`nexuslogin`) is also used in the Jenkinsfile to authenticate with Nexus.
 
-### ✅ 5. Set Up Slack Notifications
+###  5. Set Up Slack Notifications
 
 To receive build notifications in a Slack channel, follow these steps:
 
 ---
 
-#### 🔸 1. Create a Slack App & Webhook
+####  1. Create a Slack App & Webhook
 
 1. Go to: https://api.slack.com/apps
 2. Click **"Create New App"**
@@ -191,7 +191,7 @@ To receive build notifications in a Slack channel, follow these steps:
 
 ---
 
-#### 🔸 3. Configure Slack in Jenkins
+####  3. Configure Slack in Jenkins
 
 1. Go to `Manage Jenkins > Configure System`.
 2. Scroll to the **Slack** section.
