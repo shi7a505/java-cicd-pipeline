@@ -184,7 +184,7 @@ To receive build notifications in a Slack channel, follow these steps:
 
 ---
 
-#### 🔸 2. Install Slack Plugin in Jenkins
+####  2. Install Slack Plugin in Jenkins
 
 1. Go to `Manage Jenkins > Plugin Manager`.
 2. Install the **Slack Notification** plugin.
