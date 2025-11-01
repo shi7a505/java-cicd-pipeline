@@ -82,7 +82,7 @@ This CI/CD pipeline is designed to run on a main Jenkins EC2 instance, connected
 
 ---
 
-### ✅ 1. Launch Jenkins EC2 Instance
+###  1. Launch Jenkins EC2 Instance
 
 - Launch an EC2 instance (Ubuntu is recommended).
 - Install **JDK 21** and **Jenkins** using the following commands:
@@ -105,7 +105,7 @@ sudo apt-get install jenkins
   - `8080` – for accessing Jenkins UI  
   - `22` – for SSH access
 
-### ✅ 2. Access Jenkins & Install Tools
+###  2. Access Jenkins & Install Tools
 
 - Open your browser and navigate to your Jenkins server using its public IP address.  
   For example:  
@@ -124,7 +124,7 @@ sudo apt-get install jenkins
 
 > These tools will be used in the Jenkinsfile to build and test the application.
 
-### ✅ 3. Launch Nexus & SonarQube EC2 Instances
+###  3. Launch Nexus & SonarQube EC2 Instances
 
 - Create two additional EC2 instances (Ubuntu or Amazon Linux):
 
@@ -143,9 +143,9 @@ sudo apt-get install jenkins
   - Access Nexus in browser: `http://<nexus-ip>:8081`
   - Access SonarQube in browser: `http://<sonarqube-ip>:9000`
 
-### ✅ 4. Configure Integration in Jenkins
+###  4. Configure Integration in Jenkins
 
-#### 🔸 SonarQube Integration:
+####  SonarQube Integration:
 1. Go to `Manage Jenkins > Configure System`.
 2. Scroll to the **SonarQube Servers** section.
 3. Add a new server:
